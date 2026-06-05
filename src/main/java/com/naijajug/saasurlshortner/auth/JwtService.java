@@ -20,6 +20,8 @@ public class JwtService {
     public String generateToken(String email, Set<Roles> userRoles){ //use email as username
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", userRoles.stream().map(Enum::name).collect(Collectors.toSet()));
+        claims.put("sessionId",activeSessionId);
+        claims.put("tenancyId",String.valueOf(userId));
         return createToken(claims, email);
     }
 
@@ -40,6 +42,15 @@ public class JwtService {
 
     public String extractUsername(String token) {
         return extractAllClaims(token).getSubject();
+    }
+
+    public String extractUserSessionId(String token) {
+        Claims claims = extractAllClaims(token);
+        return  (String)claims.get("sessionId");
+    }
+    public String extractTenancyId(String token) {
+        Claims claims = extractAllClaims(token);
+        return  (String)claims.get("tenancyId");
     }
 
     public Date extractExpiration(String token) {

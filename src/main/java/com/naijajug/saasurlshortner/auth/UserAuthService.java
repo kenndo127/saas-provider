@@ -24,7 +24,7 @@ public class UserAuthService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
         Optional<UserModel> userModelOptional = userModelRepository.findByEmail(email);
 
-        if (userModelOptional.isEmpty()) throw new ResourceNotFoundException("User not found");
+        if (userModelOptional.isEmpty()) throw new ResourceNotFoundException("User not found!");
         UserModel user = userModelOptional.get();
         // .orElseThrow( error ) can work here
 
