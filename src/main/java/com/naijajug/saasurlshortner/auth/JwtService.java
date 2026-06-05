@@ -17,7 +17,7 @@ public class JwtService {
     @Value("${saasurl.jwt.secret}")
     public String secret;
 
-    public String generateToken(String email, Set<Roles> userRoles){ //use email as username
+    public String generateToken(String email, Set<Roles> userRoles, String activeSessionId, UUID userId){ //use email as username
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", userRoles.stream().map(Enum::name).collect(Collectors.toSet()));
         claims.put("sessionId",activeSessionId);

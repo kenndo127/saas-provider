@@ -17,4 +17,3 @@ CREATE TABLE user_roles(
    CONSTRAINT pk_user_roles
        PRIMARY KEY (user_id, role)
 )
-
